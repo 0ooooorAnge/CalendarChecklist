@@ -1,1 +1,1 @@
-Read Me and go to download my code!
+DON'T READ ME AND JUTS GO TO DOWNLOAD MY APPLICATIONS!
