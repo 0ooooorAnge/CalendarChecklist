@@ -3,13 +3,17 @@ package com.example.calendarchecklist;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -17,16 +21,20 @@ public class AddTaskActivity extends AppCompatActivity {
     private CheckBox checkBoxDaily;
     private CheckBox checkBoxSpecial;
     private Button buttonSave;
-    private Button buttonBack;
     private TaskDbHelper dbHelper;
-
     private String targetDate; // 从主界面传递过来的日期
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true); // 可选，让图标可点击
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         // 获取传递的日期
         targetDate = getIntent().getStringExtra("date");
         if (targetDate == null) {
@@ -39,7 +47,7 @@ public class AddTaskActivity extends AppCompatActivity {
         checkBoxDaily = findViewById(R.id.checkBoxDaily);
         checkBoxSpecial = findViewById(R.id.checkBoxSpecial);
         buttonSave = findViewById(R.id.buttonSave);
-        buttonBack = findViewById(R.id.buttonBack);
+
 
         dbHelper = new TaskDbHelper(this);
 
@@ -58,14 +66,27 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
-        // 返回按钮点击事件
-        buttonBack.setOnClickListener(new View.OnClickListener() {
+        // 找到返回按钮并设置点击事件
+        ImageButton btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // 直接关闭当前页面，返回主界面
+                finish(); // 关闭当前页面，返回上一页
             }
         });
+
+
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // 自定义返回逻辑
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     // 添加任务到数据库
     private void addTask(String taskName, boolean isDaily, boolean isSpecial) {

@@ -1,9 +1,14 @@
 package com.example.calendarchecklist;
 
+import android.app.Application;
 import android.content.ContentValues;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.style.ForegroundColorSpan;
+import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,6 +18,8 @@ import android.widget.Toast;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_ADD_TASK = 1; // 添加请求码
     private TextView textViewTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         calendarView = findViewById(R.id.calendarView);
         recyclerView = findViewById(R.id.recyclerView);
-        Button buttonAdd = findViewById(R.id.buttonAdd); // 获取按钮
+        buttonAdd = findViewById(R.id.buttonAdd); // 获取按钮
         textViewTitle = findViewById(R.id.textViewTitle);
         dbHelper = new TaskDbHelper(this);
 
@@ -68,6 +75,27 @@ public class MainActivity extends AppCompatActivity {
                 loadTasksForDate(currentDate);
             }
         });
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+//    // 获取当前主题模式下的日历文字颜色
+//        int dateTextColor = ContextCompat.getColor(this, com.google.android.material.R.color.material_dynamic_neutral0);
+
+        int dateTextColor = ContextCompat.getColor(this, R.color.calendar_date_text);
+        int backgroundColor = ContextCompat.getColor(this, R.color.calendar_bg);
+
+
+        // 添加日期颜色装饰器
+        calendarView.addDecorator(new DateTextColorDecorator(dateTextColor));
+        Button buttonSettings = findViewById(R.id.buttonSettings);
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +107,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //updateCalendarDecorators();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // 自定义返回逻辑
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     private void updateTitleForDate(String date) {
         try {
@@ -253,6 +291,23 @@ public class MainActivity extends AppCompatActivity {
 
         calendarView.removeDecorators();
         //calendarView.addDecorator(new EventDecorator(datesWithLogs));
+    }
+    private class DateTextColorDecorator implements DayViewDecorator {
+        private final int color;
+
+        public DateTextColorDecorator(int color) {
+            this.color = color;
+        }
+
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            return true; // 装饰所有日期
+        }
+
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.addSpan(new ForegroundColorSpan(color));
+        }
     }
 
 //    private class EventDecorator implements DayViewDecorator {

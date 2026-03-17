@@ -27,11 +27,30 @@
         android:layout_weight="1"
         android:layout_marginBottom="16dp" />
 
-    <Button
-        android:id="@+id/buttonAdd"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+ 添加事项"
-        android:textSize="16sp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonSettings"
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:text="设置" />
+
+        <Space
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ 添加事项"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
