@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <!-- 填充颜色，可替换为需要的颜色值或颜色资源 -->
+    <solid android:color="#405E90" />
+    <!-- 如果需要边框，可以添加 <stroke> 标签 -->
+    <!-- <stroke android:width="1dp" android:color="#FF0000" /> -->
+</shape>

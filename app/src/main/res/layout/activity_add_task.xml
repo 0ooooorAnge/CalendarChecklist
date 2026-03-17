@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/title_bar_bg">
+    android:id="@+id/add"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <!-- 自定义标题栏 -->
     <LinearLayout
@@ -11,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="16dp">
+        android:padding="4dp">
 
         <!-- 返回箭头按钮 -->
         <ImageButton
@@ -19,10 +21,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="返回"
+            android:contentDescription="@string/返回"
             android:padding="8dp"
             android:src="@drawable/ic_arrow_back"
-            android:tint="@color/title_bar_text" />
+            android:tint="@color/title_bar_text"
+            tools:ignore="UseAppTint" />
 
         <!-- 标题 -->
         <TextView
@@ -38,7 +41,7 @@
     <!-- 主要内容区域 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -49,24 +52,55 @@
             android:layout_marginBottom="16dp"
             android:hint="在此输入事件内容" />
 
-        <CheckBox
-            android:id="@+id/checkBoxDaily"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="每天重复" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <CheckBox
-            android:id="@+id/checkBoxSpecial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="今日特殊事件" />
+            <RadioButton
+                android:id="@+id/radioButtonDaily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重复事件" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonPickDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择持续日期" />
+
+                <TextView
+                    android:id="@+id/tvDateRange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toTopOf="@+id/btnSelectDate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/radioButtonSpecial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日特殊事件"
+                />
+
+        </RadioGroup>
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="保存" />
+
     </LinearLayout>
 </LinearLayout>

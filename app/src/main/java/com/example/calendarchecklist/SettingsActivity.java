@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.md_theme_background));
 
         radioGroupTheme = findViewById(R.id.radioGroupTheme);
         radioFollowSystem = findViewById(R.id.radioFollowSystem);

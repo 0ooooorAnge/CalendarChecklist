@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp">
 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -18,7 +21,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -31,25 +35,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp"
+        >
 
-        <Button
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/buttonSettings"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:background="@drawable/circle_background"-->
+<!--            android:contentDescription="设置"-->
+<!--            android:padding="8dp"-->
+<!--            android:src="@drawable/ic_settings"-->
+<!--            android:tint="@color/title_bar_text"-->
+<!--            tools:ignore="UseAppTint" />-->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonSettings"
-            android:layout_width="78dp"
-            android:layout_height="match_parent"
-            android:text="设置" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_settings"
+            app:backgroundTint="@color/md_theme_inversePrimary"
+            app:maxImageSize="28dp"
+            app:fabSize="mini"
+            tools:ignore="ContentDescription"
+            app:elevation="0dp"
+            android:outlineProvider="none"
+            android:stateListAnimator="@null"
+            app:borderWidth="0dp"
+            app:pressedTranslationZ="0dp" />
 
         <Space
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_weight="5" />
 
-        <Button
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonAdd"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+ 添加事项"
-            android:textSize="16sp" />
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/md_theme_inversePrimary"
+            app:maxImageSize="32dp"
+            app:fabSize="auto"
+            app:elevation="0dp"
+            android:outlineProvider="none"
+            android:stateListAnimator="@null"
+            app:borderWidth="0dp"
+            app:pressedTranslationZ="0dp"
+            tools:ignore="ContentDescription" />
+
 
     </LinearLayout>
 

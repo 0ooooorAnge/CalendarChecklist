@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    >
 
 
     <!-- 自定义标题栏 -->
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="8dp"
+        >
 
         <!-- 返回箭头按钮 -->
         <ImageButton
@@ -22,7 +23,7 @@
             android:layout_height="match_parent"
             android:background="?android:attr/selectableItemBackground"
             android:contentDescription="返回"
-            android:padding="8dp"
+
             android:src="@drawable/ic_arrow_back"
             android:tint="@color/title_bar_text"
             android:visibility="visible" />
@@ -43,7 +44,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <RadioGroup
             android:id="@+id/radioGroupTheme"
